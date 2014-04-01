@@ -1,4 +1,4 @@
-sencha_todo_list
+Todo List with Sencha Touch 2
 ================
 
-A Sencha touch todo list
+
