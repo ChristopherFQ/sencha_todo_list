@@ -8,7 +8,7 @@ Ext.define('todoList.controller.Memo', {
        		malist: 'memolist',
        		submit: 'button[action="submit"]',
        		itemtap: 'memolist',
-       		removeMemo: '#supMemo'
+       		removeMemo: 'memodetail #supMemo'
        },
        control: {
        		createBtn: {
@@ -71,8 +71,8 @@ Ext.define('todoList.controller.Memo', {
     	var navview = Ext.getCmp('navview'),
 	    	memolist = Ext.getCmp('memolist'),
 	    	store = Ext.getStore('Todo'),
-	    	title = record.getData()['title'],
-	    	content = record.getData()['content'];
+	    	title = record.get('title'),
+	    	content = record.get('content');
 
 	    memolist.mask({
     		xtype:'loadmask',
@@ -80,27 +80,21 @@ Ext.define('todoList.controller.Memo', {
 
     	});
     	navview.push(
-    		Ext.create('todoList.view.MemoDetail', {title:title, html:content, action:index})
+    		Ext.create('todoList.view.MemoDetail', {title:title, data:record.getData()})
     	);
 	},
-	removeMemo: function(field) {
+	removeMemo: function(elem) {
 
-            var store = Ext.getStore('Todo');
-            console.log(store.getId());   
-            console.log(field);    
-            /*var idx = 5;
-            var object = store.getData().items[idx];*/
-           // console.log(navview);
-			//store.remove(this);
-			//store.sync();
-
-
-            //var object = store.getData();
-            //var idx = store.getData().items[index].data['id'];
-            //var object = store.getById(index);
-            
-            //store.removeAt(idx);
-            //store.sync();
+	        var store = Ext.getStore("Todo"),
+	        memodetail = elem.getParent().getParent();
+	        
+	        var id = memodetail.getData()['id'],
+	            rec = store.getById(id);
+	        store.remove(rec);
+	        store.sync();
+	
+	        var navview = Ext.getCmp('navview');
+	        navview.pop();
 
 	}
 });
