@@ -1,8 +1,8 @@
 Ext.define('todoList.view.MemoDetail', {
-    extend: 'Ext.NavigationView',
+    extend: 'Ext.Panel',
     xtype: 'memodetail',
     config: {
-    	id: 'memodetail',
+    	tpl:'{content}',
     	items: [
     		{
     			xtype:'toolbar',
@@ -16,7 +16,7 @@ Ext.define('todoList.view.MemoDetail', {
     				{
                         flex: 1,
     					xtype:'button',
-    					text: 'Sup',
+    					iconCls:'trash',
     					id:'supMemo',
     					style: 'background:red'
     				}
@@ -25,5 +25,5 @@ Ext.define('todoList.view.MemoDetail', {
     	]
     },
     fullscreen:true,
-    defaultBackButtonText: 'Retour',
+    defaultBackButtonText: 'Retour'
 });
